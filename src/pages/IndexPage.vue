@@ -3,7 +3,7 @@
       <q-input
         v-model="search"
         @keyup.enter="getResults"
-        placeholder="Ingresa un nombre de equipo o ciudad"
+        placeholder="Enter the name of the stadium, city or country"
         >
         <template v-slot:append>
          <q-icon
@@ -12,36 +12,59 @@
           />
         </template>
       </q-input>
-      <div class="col q-pa-md q-mt-md">
-        <div class="text-h6 text-weight-regular">
-          Nombre del estadio: <br> {{stadiumData.name}}
+
+ 
+        <div class="row justify-center q-pa-lg q-mt-md">
+          <q-card class="my-card" >
+            <img :src="stadiumData.image">
+
+            <q-list>
+              <q-item>
+                <q-item-section class="text-center">
+                  <q-item-label class="text-subtitle2" >{{stadiumData.name}}</q-item-label>
+                  <q-item-label caption>Stadium Name</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item>
+                <q-item-section class="text-center">
+                  <q-item-label class="text-subtitle2">{{stadiumData.capacity}}</q-item-label>
+                  <q-item-label caption>Capacity</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item>
+                <q-item-section class="text-center">
+                  <q-item-label class="text-subtitle2">{{stadiumData.city}}</q-item-label>
+                  <q-item-label caption>City</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item>
+                <q-item-section class="text-center">
+                  <q-item-label class="text-subtitle2">{{stadiumData.country}}</q-item-label>
+                  <q-item-label caption>Country</q-item-label>
+                </q-item-section>
+              </q-item>
+
+
+            </q-list>
+          </q-card>
         </div>
-        <div class="text-h6 text-weight-regular">
-          Capacidad: {{stadiumData.capacity}}
-        </div>
-        <div class="text-h6 text-weight-regular">
-          Ciudad: {{stadiumData.city}}
-        </div>
-        <div class="text-h6 text-weight-regular">
-          Pais: {{stadiumData.country}}
-        </div>
-        <div class="q-mt-md">
-          <q-img
-          :src="stadiumData.image"
-          />
-        </div>
-      </div>
+   
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref} from 'vue'
 import axios from 'axios'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'IndexPage',
 
   setup () {
+    const $q = useQuasar()
     const search = ref('')
     const apiKey = ref('b6004fba06b499ba6cd2b7b7e00939f5')
     const baseUrl = ref('https://v3.football.api-sports.io')
@@ -49,7 +72,7 @@ export default defineComponent({
 
     const getResults = async () => {
       try {
-        console.log('GREAT')
+        //console.log('GREAT')
         const response = await axios(`${baseUrl.value}/venues?search=${search.value}`, {
           method: 'get',
           headers: {
@@ -58,11 +81,17 @@ export default defineComponent({
         }
       })
 
-        stadiumData.value = response.data.response[0]
-        search.value=''
-        //console.log(response.data.response[0].players)
-        //console.log(response.data.response[0].name)
-        //console.log(stadiumData.value)
+        if(stadiumData.value = response.data.response[0]){
+           search.value=''
+           console.log(response.data)
+        } else {
+          console.log('Please try to enter the name of the stadium, city or country')
+          $q.notify({
+          type: 'negative',
+          message: 'Please try to enter a valid name of a stadium, city or country'
+          })
+  
+        }
       }
       catch(err) {
         console.log(err.message)
@@ -76,5 +105,13 @@ export default defineComponent({
 // Get all players statistics from one {team} & {season}
 //get("https://v3.football.api-sports.io/players?season=2018&team=33");
 
+//// Allows you to search for a venues in relation to a venue {name}, {city} or {country}
+
 </script>
+
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 300px
+</style>
 
