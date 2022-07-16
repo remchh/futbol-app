@@ -17,9 +17,17 @@
 
       <div class="row justify-around">
         <div
+          class="col q-pa-lg q-mt-md"
+          v-if="!stadiumData"
+          >
+          <q-img 
+          src="https://media.giphy.com/media/JmrkCxoxJm5OW3mv0Z/giphy.gif"
+          />
+        </div>
+        <div
           v-for="(item, index) in stadiumData"
           :key="item[index]"
-          class="col-md-4 q-pa-lg q-mt-md"
+          class="col-md-4 col-sm-6 col-xs-12 q-pa-lg q-mt-md flex flex-center"
           >
           <q-card class="my-card">
             
@@ -116,8 +124,8 @@ export default defineComponent({
 
 //// Allows you to search for a venues in relation to a venue {name}, {city} or {country}
 
-//PENDIENTE AGREGAR GIF DE INICIO
 //PENDIENTE FILTRAR A 12 CARDS
+//DEFINIR TAMAÑO MINIMO CARDS
 
 </script>
 
@@ -125,5 +133,6 @@ export default defineComponent({
 .my-card
   width: 100%
   max-width: 300px
+
 </style>
 
