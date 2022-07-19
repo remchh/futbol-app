@@ -1,6 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <h4>Help Page</h4>
+  <q-page class="q-pa-md">
+    <h5 >Help</h5>
+    <p class="text-body1">Just enter a name of stadium, city or country and then the app will show you the twelve largest stadiums 🏟</p>
   </q-page>
 </template>
 

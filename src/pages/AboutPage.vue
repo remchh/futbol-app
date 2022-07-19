@@ -1,6 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <h4>About Page</h4>
+  <q-page class="q-pa-md">
+    <h5 >About</h5> 
+    <p class="text-body1">This is my first app from scratch made with API, I am glad to share with you 😁</p>
   </q-page>
 </template>
 

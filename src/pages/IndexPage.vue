@@ -5,7 +5,7 @@
         @keyup.enter="getResults"
         placeholder="Enter the name of the stadium, city or country"
   
-        standout="bg-secondary text-white"
+        standout="bg-blue-grey-10 text-white"
         >
         <template v-slot:append>
          <q-icon
@@ -25,7 +25,7 @@
           />
         </div>
         <div
-          v-for="(item, index) in stadiumData"
+          v-for="(item, index) in sortData"
           :key="item[index]"
           class="col-md-4 col-sm-6 col-xs-12 q-pa-lg q-mt-md flex flex-center"
           >
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { defineComponent, ref} from 'vue'
+import { defineComponent, ref, computed} from 'vue'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 
@@ -87,7 +87,7 @@ export default defineComponent({
 
     const getResults = async () => {
       try {
-        //console.log('GREAT')
+        $q.loading.show()
         const response = await axios(`${baseUrl.value}/venues?search=${search.value}`, {
           method: 'get',
           headers: {
@@ -96,26 +96,42 @@ export default defineComponent({
         }
       })
         stadiumData.value = response.data.response
+
         if(stadiumData.value.length === 0){
           search.value=''
           console.log('Please try to enter the name of the stadium, city or country')
           $q.notify({
           type: 'negative',
-          message: 'Please try to enter a valid name of a stadium, city or country'
+          message: 'Please try to enter a valid name of a stadium, city or country',
+          position: 'center'
           })
         } else {
+          stadiumData.value.sort((a,b) => (b.capacity - a.capacity))
            search.value=''
            console.log(response.data.response.length)
            console.log(response.data.response)
-  
+           console.log(stadiumData.value)
+          console.log(stadiumData.value.slice(0, 12))
+          console.log(sortData.value)
+
+          
         }
+        
       }
       catch(err) {
         console.log(err.message)
       }
+      $q.loading.hide()
     }
+    const sortData = computed(() => stadiumData.value.slice(0, 12))
 
-    return {search, getResults, stadiumData}
+
+    return {
+            search, 
+            getResults, 
+            stadiumData,
+            sortData
+          }
   }
 
 })
@@ -124,8 +140,9 @@ export default defineComponent({
 
 //// Allows you to search for a venues in relation to a venue {name}, {city} or {country}
 
-//PENDIENTE FILTRAR A 12 CARDS
-//DEFINIR TAMAÑO MINIMO CARDS
+//PENDING TO SHOW UP ONLY 12 CARDS
+//ADD RECAPTCHA
+//DEPLOY
 
 </script>
 
