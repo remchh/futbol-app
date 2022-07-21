@@ -140,9 +140,10 @@ export default defineComponent({
 
 //// Allows you to search for a venues in relation to a venue {name}, {city} or {country}
 
-//PENDING TO SHOW UP ONLY 12 CARDS
+//KEEP ALIVE
 //ADD RECAPTCHA
 //DEPLOY
+//TRANSITION OR ANIMATION
 
 </script>
 
