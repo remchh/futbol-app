@@ -7,5 +7,5 @@ const
 const app = express()
 
 app.use(history())
-app.use(serveStatic(__dirname + '/dist/spa/index.html'))
+app.use(serveStatic(__dirname + '/dist/spa'))
 app.listen(port)
