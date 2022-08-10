@@ -1,8 +1,8 @@
 {
   "name": "futbol-app-api",
   "version": "0.0.1",
-  "description": " A Quasar Project using API",
-  "productName": "remch.app.io",
+  "description": " A Futbol Stadium App Project using API",
+  "productName": "Football Stadiums",
   "author": "remch.app.io",
   "private": true,
   "scripts": {
