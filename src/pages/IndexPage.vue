@@ -102,7 +102,7 @@ export default defineComponent({
 
     const $q = useQuasar()
     const search = ref('')
-    const apiKey = ref('b6004fba06b499ba6cd2b7b7e00939f5')
+    const apiKey = ref(process.env.VUE_APP_API_KEY)
     const baseUrl = ref('https://v3.football.api-sports.io')
     const stadiumData = ref('')
 
