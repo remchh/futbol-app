@@ -182,6 +182,7 @@ export default defineComponent({
             handleExpire,
             disable,
             recaptcha,
+            apiKey
           }
   }
 
