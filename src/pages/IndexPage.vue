@@ -102,9 +102,9 @@ export default defineComponent({
 
     const $q = useQuasar()
     const search = ref('')
-    /*const apiKey = computed(() => {
+    const apiKey = computed(() => {
       return process.env.VUE_APP_API_KEY
-    })*/
+    })
     const baseUrl = ref('https://v3.football.api-sports.io')
     const stadiumData = ref('')
 
@@ -114,7 +114,7 @@ export default defineComponent({
         const response = await axios(`${baseUrl.value}/venues?search=${search.value}`, {
           method: 'get',
           headers: {
-          'x-rapidapi-key': process.env.VUE_APP_API_KEY,
+          'x-rapidapi-key': apiKey.value,
           'x-rapidapi-host': 'v3.football.api-sports.io'
         }
       })
@@ -181,7 +181,8 @@ export default defineComponent({
             handleSuccess,
             handleExpire,
             disable,
-            recaptcha
+            recaptcha,
+            apiKey
           }
   }
 
