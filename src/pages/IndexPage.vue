@@ -155,7 +155,7 @@ export default defineComponent({
 /*RECAPTCHA*/
 
     const siteKey = computed(() => {
-      return '6LfplGYhAAAAACox6XCtc3UjkCSO678toQnzRqsG'
+      return process.env.VUE_APP_SITE_KEY
     })
     const disable = ref(true)
     const recaptcha = ref(null)
