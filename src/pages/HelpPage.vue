@@ -7,9 +7,41 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent /*onMounted, onUpdated, onUnmounted, onBeforeMount, onBeforeUpdate, onBeforeUnmount, onActivated, onDeactivated*/ } from 'vue'
 
 export default defineComponent({
-  name: 'HelpPage'
+  name: 'HelpPage',
+  
+/*setup() {
+  onMounted(() => {
+    console.log('onMounted')
+  })
+  onUpdated(() => {
+    console.log('onUpdated')
+  })
+  onUnmounted(() => {
+    console.log('onUnmounted')
+  })
+  onBeforeMount(() => {
+    console.log('onBeforeMount')
+  })
+  onBeforeUpdate(() => {
+    console.log('onBeforeUpdate')
+  })
+  onBeforeUnmount(() => {
+    console.log('onBeforeUnmount')
+  })
+  onActivated(() => {
+    console.log('onActivated')
+  })
+  onDeactivated(() => {
+    console.log('onDeactivated')
+  })
+}*/
+
 })
+
+
+
+
 </script>

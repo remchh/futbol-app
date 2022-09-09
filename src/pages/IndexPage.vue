@@ -4,9 +4,8 @@
         v-model="search"
         @keyup.enter="getResults"
         placeholder="Enter the name of the stadium, city or country"
-        standout="dark text-white"
         :disable="disable"
-   
+        standout="teal-10 text-white"
         >
         <template v-slot:append>
          <q-icon
@@ -86,7 +85,7 @@
 
 
 <script>
-import { defineComponent, ref, computed} from 'vue'
+import { defineComponent, ref, computed, onDeactivated } from 'vue'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { VueRecaptcha } from 'vue-recaptcha';
@@ -133,11 +132,11 @@ export default defineComponent({
           stadiumData.value.sort((a,b) => (b.capacity - a.capacity))
           search.value=''
 
-          console.log(response.data.response.length)
+          /*console.log(response.data.response.length)
           console.log(response.data.response)
           console.log(stadiumData.value)
           console.log(stadiumData.value.slice(0, 12))
-          console.log(sortData.value)
+          console.log(sortData.value)*/
 
           disable.value=true
           recaptcha.value.reset()
@@ -169,6 +168,11 @@ export default defineComponent({
     const handleExpire = () => {
       disable.value = !disable.value
     }
+    onDeactivated(() => {
+      console.log('onDeactivated')
+      disable.value=true
+      recaptcha.value.reset()
+    })
 
 
     return {
@@ -182,7 +186,7 @@ export default defineComponent({
             handleExpire,
             disable,
             recaptcha,
-            apiKey
+            apiKey,
           }
   }
 
